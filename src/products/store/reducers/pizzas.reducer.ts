@@ -1,5 +1,5 @@
 import { PizzaState } from "./pizzas.reducer";
-import * as fromPizzas from "../actions/pizzas.actions";
+import * as fromPizzas from "../actions/pizzas.action";
 import { Pizza } from "./../../models/pizza.model";
 
 export interface PizzaState {
@@ -9,38 +9,7 @@ export interface PizzaState {
 }
 
 export const initialState: PizzaState = {
-  data: [
-    {
-      name: "Blazin' Inferno",
-      toppings: [
-        {
-          id: 10,
-          name: "pepperoni"
-        },
-        {
-          id: 9,
-          name: "pepper"
-        },
-        {
-          id: 3,
-          name: "basil"
-        },
-        {
-          id: 4,
-          name: "chili"
-        },
-        {
-          id: 7,
-          name: "olive"
-        },
-        {
-          id: 2,
-          name: "bacon"
-        }
-      ],
-      id: 1
-    }
-  ],
+  data: [],
   loaded: false,
   loading: false
 };
@@ -57,10 +26,12 @@ export function reducer(
       };
     }
     case fromPizzas.LOAD_PIZZAS_SUCCESS: {
+      const data = action.payload;
       return {
         ...state,
         loading: false,
-        loaded: true
+        loaded: true,
+        data
       };
     }
     case fromPizzas.LOAD_PIZZAS_FAIL: {
